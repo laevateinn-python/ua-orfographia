@@ -7,7 +7,7 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-
+import os
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
     QRect, QSize, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
@@ -15,6 +15,7 @@ from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QRadialGradient)
 from PySide2.QtWidgets import *
 
+DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -23,6 +24,7 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(997, 702)
         MainWindow.setDocumentMode(False)
+        
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.action_3 = QAction(MainWindow)
