@@ -114,7 +114,24 @@ class MainWindow(QMainWindow):
 
     def check_parameters(self,massive):
         if self.ui.checkBox_predict.isChecked():
-            pass
+            if self.ui.radioButton_rid.isChecked():
+                msg = 'Я думаю відповідь '
+                self.show_message(msg+self.predict_by_rid(self.find_rid(massive),
+                                    woman=self.ui.checkBox_2.isChecked(),
+                                    man = self.ui.checkBox_3.isChecked(),
+                                    ser = self.ui.checkBox_4.isChecked()))
+
+            elif self.ui.radioButton_chislo.isChecked():
+                #self.answer.show_text(self.find_chislo(self.find_vidminok(massive),massive))
+                pass
+            elif self.ui.radioButton_vidminok.isChecked():
+                #self.answer.show_table(self.find_vidminok(massive))
+                pass
+            elif self.ui.radioButton_vidmina.isChecked():
+                #self.answer.show_text(self.find_vidmina(massive))
+                pass
+            else:
+                self.show_message("Виберіть що хочете знайти")
         else:
             if self.ui.radioButton_rid.isChecked():
                 self.answer.show_text(self.find_rid(massive))
@@ -124,7 +141,6 @@ class MainWindow(QMainWindow):
                 self.answer.show_table(self.find_vidminok(massive))
             elif self.ui.radioButton_vidmina.isChecked():
                 self.answer.show_text(self.find_vidmina(massive))
-                pass
             else:
                 self.show_message("Виберіть що хочете знайти")
 
@@ -150,6 +166,7 @@ class MainWindow(QMainWindow):
 
         return(l)
 
+#--------------------------- find block ---------------------------------------
     def find_rid(self,massive):
         res = []
         for i in range(self.ROW):
@@ -242,9 +259,40 @@ class MainWindow(QMainWindow):
                 else:
                     n.append('X')
             res.append(n)
-        print(rid[i][j])
         return(res)
 
+#--------------------------- predict block ------------------------------------
+    def predict_by_rid(self,data,**params):
+        l = []
+        if params['woman']:
+            l.append('жіночий')
+        if params['man']:
+            l.append('чоловічий')
+        if params['ser']:
+            l.append('середній')
+        if len(l) > 1:
+            if l[0] == 'жіночий':
+                if l[1] == 'чоловічий':
+                    l.append('чоловічий і жіночий')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count +=1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
+
+
+    def predict_by_chislo(self):
+        pass
+
+    def predict_by_vidminok(self):
+        pass
+
+    def predict_by_vidmina(self):
+        pass
+#------------------------------------------------------------------------------
 
 
 
