@@ -14,6 +14,11 @@ from my_parser import MyParser
 ANSWER_LETTER = 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
+class ExportFile(QWidget):
+    def TXT(self):
+        QFileDialog().getSaveFileName(self, "Save file", '',".txt")
+
+
 class AnswerWindow(QMainWindow):
     def __init__(self,row,words):
         super(AnswerWindow, self).__init__()
@@ -98,7 +103,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
-        self.last_word = []
+        self.export = ExportFile()
+        self.ui.actionTXT.triggered.connect(self.export.TXT())
 
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
@@ -163,7 +169,6 @@ class MainWindow(QMainWindow):
                 text = l[i][j]
                 text = text[1:len(l[i][j])]
                 l[i][j] = text
-
         return(l)
 
 #--------------------------- find block ---------------------------------------
@@ -180,6 +185,7 @@ class MainWindow(QMainWindow):
                 except:
                     n.append("Слова немає в базі")
             res.append(n)
+        self.global_save = res
         return(res)
 
     def find_vidminok(self,massive):
@@ -195,9 +201,8 @@ class MainWindow(QMainWindow):
                     for b in range(7):
                         mb.append(["Слова немає в базі",'X','X'])
                     n.append(mb)
-
-
             res.append(n)
+        self.global_save = res
         return res
 
     def find_chislo(self,massive,massive2):
@@ -219,6 +224,7 @@ class MainWindow(QMainWindow):
                 else:
                     n.append("Слова немає в базі")
             res.append(n)
+        self.global_save = res
         return res
 
     def find_vidmina(self,massive):
@@ -259,6 +265,7 @@ class MainWindow(QMainWindow):
                 else:
                     n.append('X')
             res.append(n)
+        self.global_save = res
         return(res)
 
 #--------------------------- predict block ------------------------------------
@@ -281,8 +288,9 @@ class MainWindow(QMainWindow):
                 if data[i][j] in l:
                     count +=1
             res.append(count)
-        return(ANSWER_LETTER[res.index(max(res))])
-
+        answer = ANSWER_LETTER[res.index(max(res))]
+        self.global_save = answer
+        return(answer)
 
     def predict_by_chislo(self,data,**params):
         l =[]
@@ -297,8 +305,9 @@ class MainWindow(QMainWindow):
                 if data[i][j] in l:
                     count += 1
             res.append(count)
-        return(ANSWER_LETTER[res.index(max(res))])
-
+        answer = ANSWER_LETTER[res.index(max(res))]
+        self.global_save = answer
+        return(answer)
 
     def predict_by_vidmina(self,data,**params):
         l = []
@@ -312,7 +321,9 @@ class MainWindow(QMainWindow):
                 if data[i][j] in l:
                     count += 1
             res.append(count)
-        return(ANSWER_LETTER[res.index(max(res))])
+        answer = ANSWER_LETTER[res.index(max(res))]
+        self.global_save = answer
+        return(answer)
 
 
 #------------------------------------------------------------------------------
