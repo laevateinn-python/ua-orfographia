@@ -120,8 +120,11 @@ class MainWindow(QMainWindow):
 
             elif self.ui.radioButton_vidmina.isChecked():
                 msg = 'Я думаю відповідь '
-                #self.answer.show_text(self.find_vidmina(massive))
-                pass
+                self.show_message(msg + self.predict_by_vidmina(self.find_vidmina(massive),
+                                        a0 = self.ui.checkBox_vidm_1.isChecked(),
+                                        a1 = self.ui.checkBox_vidm_2.isChecked(),
+                                        a2 = self.ui.checkBox_vidm_3.isChecked(),
+                                        a3 = self.ui.checkBox_vidm_4.isChecked()))
             else:
                 self.show_message("Виберіть що хочете знайти")
         else:
@@ -291,23 +294,22 @@ class MainWindow(QMainWindow):
         return(ANSWER_LETTER[res.index(max(res))])
 
 
-    def predict_by_vidmina(self):
-        pass
+    def predict_by_vidmina(self,data,**params):
+        l = []
+        for k in range(4):
+            if params['a'+str(k)]:
+                l.append(str(k+1)+ ' відміна')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count += 1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
+
+
 #------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
