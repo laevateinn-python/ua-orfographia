@@ -1,3 +1,2 @@
-l = [1,0,0,4]
-
-print(max(l))
+n = "Відміна"
+print(n.encode('UTF-8'))

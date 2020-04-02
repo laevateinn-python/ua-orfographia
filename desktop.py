@@ -38,9 +38,6 @@ class AnswerWindow(QMainWindow):
 
         self.show()
 
-
-
-
     def right_output(self,text):
         return '\n'.join([str(i) for i in text])
 
@@ -88,9 +85,6 @@ class AnswerWindow(QMainWindow):
         return tabWidget
 
 
-
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -100,7 +94,6 @@ class MainWindow(QMainWindow):
         self.parser_obj = MyParser()
         self.last_word = []
 
-
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
         self.WORDS = int(self.ui.lineEdit_number_of_words.text())
@@ -109,8 +102,6 @@ class MainWindow(QMainWindow):
         massive = self.make_2d_massive(text)
         self.answer.my_masive = massive
         self.check_parameters(massive)
-
-
 
     def check_parameters(self,massive):
         if self.ui.checkBox_predict.isChecked():
@@ -127,10 +118,6 @@ class MainWindow(QMainWindow):
                                                                 mnog = self.ui.radioButton_5.isChecked(),
                                                                 odni = self.ui.radioButton_6.isChecked()))
 
-            elif self.ui.radioButton_vidminok.isChecked():
-                msg = 'Я думаю відповідь '
-                #self.answer.show_table(self.find_vidminok(massive))
-                pass
             elif self.ui.radioButton_vidmina.isChecked():
                 msg = 'Я думаю відповідь '
                 #self.answer.show_text(self.find_vidmina(massive))
@@ -148,7 +135,6 @@ class MainWindow(QMainWindow):
                 self.answer.show_text(self.find_vidmina(massive))
             else:
                 self.show_message("Виберіть що хочете знайти")
-
 
     def show_message(self,answ):
         self.ui.msg.setText(str(answ))
@@ -304,9 +290,6 @@ class MainWindow(QMainWindow):
             res.append(count)
         return(ANSWER_LETTER[res.index(max(res))])
 
-
-    def predict_by_vidminok(self):
-        pass
 
     def predict_by_vidmina(self):
         pass

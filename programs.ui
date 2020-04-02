@@ -213,7 +213,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="2" column="0">
-            <widget class="QGroupBox" name="groupBox_vidminok">
+            <widget class="QGroupBox" name="groupBox_vidmina">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -485,7 +485,7 @@
   <connection>
    <sender>radioButton_vidminok</sender>
    <signal>toggled(bool)</signal>
-   <receiver>groupBox_vidminok</receiver>
+   <receiver>groupBox_vidmina</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
