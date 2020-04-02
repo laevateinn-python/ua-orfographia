@@ -122,12 +122,17 @@ class MainWindow(QMainWindow):
                                     ser = self.ui.checkBox_4.isChecked()))
 
             elif self.ui.radioButton_chislo.isChecked():
-                #self.answer.show_text(self.find_chislo(self.find_vidminok(massive),massive))
-                pass
+                msg = 'Я думаю відповідь '
+                self.show_message(msg + self.predict_by_chislo(self.find_chislo(self.find_vidminok(massive),massive),
+                                                                mnog = self.ui.radioButton_5.isChecked(),
+                                                                odni = self.ui.radioButton_6.isChecked()))
+
             elif self.ui.radioButton_vidminok.isChecked():
+                msg = 'Я думаю відповідь '
                 #self.answer.show_table(self.find_vidminok(massive))
                 pass
             elif self.ui.radioButton_vidmina.isChecked():
+                msg = 'Я думаю відповідь '
                 #self.answer.show_text(self.find_vidmina(massive))
                 pass
             else:
@@ -284,8 +289,21 @@ class MainWindow(QMainWindow):
         return(ANSWER_LETTER[res.index(max(res))])
 
 
-    def predict_by_chislo(self):
-        pass
+    def predict_by_chislo(self,data,**params):
+        l =[]
+        if params['mnog']:
+            l.append('Множина')
+        if params['odni']:
+            l.append('Однина')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count += 1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
+
 
     def predict_by_vidminok(self):
         pass
