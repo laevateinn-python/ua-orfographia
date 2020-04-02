@@ -42,9 +42,6 @@ class AnswerWindow(QMainWindow):
 
         self.show()
 
-
-
-
     def right_output(self,text):
         return '\n'.join([str(i) for i in text])
 
@@ -92,9 +89,6 @@ class AnswerWindow(QMainWindow):
         return tabWidget
 
 
-
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -106,7 +100,6 @@ class MainWindow(QMainWindow):
         self.parser_obj = MyParser()
         self.last_word = []
 
-
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
         self.WORDS = int(self.ui.lineEdit_number_of_words.text())
@@ -116,11 +109,30 @@ class MainWindow(QMainWindow):
         self.answer.my_masive = massive
         self.check_parameters(massive)
 
-
-
     def check_parameters(self,massive):
         if self.ui.checkBox_predict.isChecked():
-            pass
+            if self.ui.radioButton_rid.isChecked():
+                msg = 'Я думаю відповідь '
+                self.show_message(msg+self.predict_by_rid(self.find_rid(massive),
+                                    woman=self.ui.checkBox_2.isChecked(),
+                                    man = self.ui.checkBox_3.isChecked(),
+                                    ser = self.ui.checkBox_4.isChecked()))
+
+            elif self.ui.radioButton_chislo.isChecked():
+                msg = 'Я думаю відповідь '
+                self.show_message(msg + self.predict_by_chislo(self.find_chislo(self.find_vidminok(massive),massive),
+                                                                mnog = self.ui.radioButton_5.isChecked(),
+                                                                odni = self.ui.radioButton_6.isChecked()))
+
+            elif self.ui.radioButton_vidmina.isChecked():
+                msg = 'Я думаю відповідь '
+                self.show_message(msg + self.predict_by_vidmina(self.find_vidmina(massive),
+                                        a0 = self.ui.checkBox_vidm_1.isChecked(),
+                                        a1 = self.ui.checkBox_vidm_2.isChecked(),
+                                        a2 = self.ui.checkBox_vidm_3.isChecked(),
+                                        a3 = self.ui.checkBox_vidm_4.isChecked()))
+            else:
+                self.show_message("Виберіть що хочете знайти")
         else:
             if self.ui.radioButton_rid.isChecked():
                 self.answer.show_text(self.find_rid(massive))
@@ -130,10 +142,8 @@ class MainWindow(QMainWindow):
                 self.answer.show_table(self.find_vidminok(massive))
             elif self.ui.radioButton_vidmina.isChecked():
                 self.answer.show_text(self.find_vidmina(massive))
-                pass
             else:
                 self.show_message("Виберіть що хочете знайти")
-
 
     def show_message(self,answ):
         self.ui.msg.setText(str(answ))
@@ -156,6 +166,7 @@ class MainWindow(QMainWindow):
 
         return(l)
 
+#--------------------------- find block ---------------------------------------
     def find_rid(self,massive):
         res = []
         for i in range(self.ROW):
@@ -248,23 +259,63 @@ class MainWindow(QMainWindow):
                 else:
                     n.append('X')
             res.append(n)
-        print(rid[i][j])
         return(res)
 
+#--------------------------- predict block ------------------------------------
+    def predict_by_rid(self,data,**params):
+        l = []
+        if params['woman']:
+            l.append('жіночий')
+        if params['man']:
+            l.append('чоловічий')
+        if params['ser']:
+            l.append('середній')
+        if len(l) > 1:
+            if l[0] == 'жіночий':
+                if l[1] == 'чоловічий':
+                    l.append('чоловічий і жіночий')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count +=1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
 
 
+    def predict_by_chislo(self,data,**params):
+        l =[]
+        if params['mnog']:
+            l.append('Множина')
+        if params['odni']:
+            l.append('Однина')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count += 1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
 
 
+    def predict_by_vidmina(self,data,**params):
+        l = []
+        for k in range(4):
+            if params['a'+str(k)]:
+                l.append(str(k+1)+ ' відміна')
+        res = []
+        for i in range(self.ROW):
+            count = 0
+            for j in range(self.WORDS):
+                if data[i][j] in l:
+                    count += 1
+            res.append(count)
+        return(ANSWER_LETTER[res.index(max(res))])
 
 
-
-
-
-
-
-
-
-
+#------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
