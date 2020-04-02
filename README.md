@@ -10,7 +10,8 @@
 
 Далі установіть залежності, ввівши команду в CMD
 `pip install -r requirements.txt`
-
+<hr>
+Для запуску програми, зайдыть в папку з проектом та введіть `python desktop.py`
 <hr>
 
 Для запитань <vladchaluk@gmail.com>
