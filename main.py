@@ -1,3 +1,5 @@
-import random
+import os
 
-print(random.getrandbits(10))
+DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
+
+print(DATA_DIR)

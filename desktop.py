@@ -1,9 +1,10 @@
-import sys
+import sys, os
 import requests
 import random
 from bs4 import BeautifulSoup
 from PySide2.QtWidgets import *
 from PySide2.QtCore import QFile, QRect
+from PySide2.QtGui import QIcon
 from programs import Ui_MainWindow
 from widget_answer import Ui_Form
 from my_parser import MyParser
@@ -11,6 +12,7 @@ from my_parser import MyParser
 
 
 ANSWER_LETTER = 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'
+DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
 class AnswerWindow(QMainWindow):
     def __init__(self,row,words):
@@ -19,6 +21,8 @@ class AnswerWindow(QMainWindow):
         self.WORDS = words
         self.window = Ui_Form()
         self.window.setupUi(self)
+        self.setWindowIcon(QIcon(DATA_DIR+'/icon.png'))
+        self.setWindowTitle('Результат')
 
     def show_text(self,text):
         self.window.toolBox.hide()
@@ -96,6 +100,8 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowIcon(QIcon(DATA_DIR+'/icon.png'))
+        self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
         self.last_word = []

@@ -46,6 +46,5 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.groupBox.setTitle(QCoreApplication.translate("Form", u"\u0412\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u044c", None))
     # retranslateUi
