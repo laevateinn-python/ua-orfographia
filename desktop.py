@@ -14,9 +14,30 @@ from my_parser import MyParser
 ANSWER_LETTER = 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
-class ExportFile(QWidget):
-    def TXT(self):
-        QFileDialog().getSaveFileName(self, "Save file", '',".txt")
+
+class FileExport(QWidget):
+    def __init__(self, data,row,words):
+        super(FileExport, self).__init__()
+        self.data = data
+        self.row = row
+        self.words = words
+    def txt(self):
+        p = QFileDialog.getSaveFileName(self,'SaveFile','відповідь','.txt')
+        with open(p[0]+p[1],'w') as f:
+            f.write(self.data)
+            f.close()
+    def json(self):
+        p = QFileDialog.getSaveFileName(self,'SaveFile','відповідь','.json')
+        if len(self.data) == 1:
+            dat = '{\nanswer: ()\n}'.format(self.data)
+        else:
+            with open(p[0]+p[1],'w') as f:
+                f.write('{')
+                for i in range(self.row):
+                    f.write('"answer' + str([i]) + '" : "' + str(self.data[i])+'",\n')
+                f.write("}")
+                f.close()
+
 
 
 class AnswerWindow(QMainWindow):
@@ -57,7 +78,7 @@ class AnswerWindow(QMainWindow):
         tableWidget.setRowCount(7)
         tableWidget.setColumnCount(2)
 
-        name_col=['Однина','Множина']
+        name_col=["Однина","Множина"]
         for m in range(2):
             name = QTableWidgetItem(name_col[m])
             tableWidget.setHorizontalHeaderItem(m,name)
@@ -103,17 +124,20 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
-        self.export = ExportFile()
-        #self.ui.actionTXT.triggered.connect(self.export.TXT())
+
 
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
         self.WORDS = int(self.ui.lineEdit_number_of_words.text())
+        self.export_row_a_word = [self.ROW,self.WORDS]
         self.answer = AnswerWindow(self.ROW,self.WORDS)
         text = self.ui.plainTextEdit.toPlainText()
         massive = self.make_2d_massive(text)
         self.answer.my_masive = massive
         self.check_parameters(massive)
+        self.export = FileExport(self.global_save,self.ROW,self.WORDS)
+        self.ui.actionTXT.triggered.connect(self.export.txt)
+        self.ui.actionJSON.triggered.connect(self.export.json)
 
     def check_parameters(self,massive):
         if self.ui.checkBox_predict.isChecked():
@@ -199,7 +223,7 @@ class MainWindow(QMainWindow):
                 except:
                     mb = []
                     for b in range(7):
-                        mb.append(["Слова немає в базі",'X','X'])
+                        mb.append(["Слова немає в базі","X","X"])
                     n.append(mb)
             res.append(n)
         self.global_save = res
@@ -220,7 +244,7 @@ class MainWindow(QMainWindow):
                 if wrd in odnina:
                     n.append("Однина")
                 elif wrd in mnogina:
-                    n.append('Множина')
+                    n.append("Множина")
                 else:
                     n.append("Слова немає в базі")
             res.append(n)
@@ -237,18 +261,18 @@ class MainWindow(QMainWindow):
                 d = vidminok[i][j]
                 if rid[i][j] == 'чоловічий':
                     if d[0][1][len(d[0][1])-1] == 'а':
-                        n.append('1 відміна')
+                        n.append("1 відміна")
                     elif d[0][1][len(d[0][1])-1] == 'я':
-                        n.append('1 відміна')
+                        n.append("1 відміна")
                     else:
-                        n.append('2 відміна')
+                        n.append("2 відміна")
                 elif rid[i][j] == 'жіночий':
                     if d[0][1][len(d[0][1])-1] == 'а':
-                        n.append('1 відміна')
+                        n.append("1 відміна")
                     elif d[0][1][len(d[0][1])-1] == 'я':
-                        n.append('1 відміна')
+                        n.append("1 відміна")
                     else:
-                        n.append('3 відміна')
+                        n.append("3 відміна")
                 elif rid[i][j] == 'середній':
                     count = 0
                     for bn in range(7):
@@ -259,11 +283,11 @@ class MainWindow(QMainWindow):
                         elif 'ен' in d[bn][1]:
                             count += 1
                     if count:
-                        n.append('4 відміна')
+                        n.append("4 відміна")
                     else:
-                        n.append('2 відміна')
+                        n.append("2 відміна")
                 else:
-                    n.append('X')
+                    n.append("X")
             res.append(n)
         self.global_save = res
         return(res)
@@ -272,15 +296,15 @@ class MainWindow(QMainWindow):
     def predict_by_rid(self,data,**params):
         l = []
         if params['woman']:
-            l.append('жіночий')
+            l.append("жіночий")
         if params['man']:
-            l.append('чоловічий')
+            l.append("чоловічий")
         if params['ser']:
-            l.append('середній')
+            l.append("середній")
         if len(l) > 1:
             if l[0] == 'жіночий':
                 if l[1] == 'чоловічий':
-                    l.append('чоловічий і жіночий')
+                    l.append("чоловічий і жіночий")
         res = []
         for i in range(self.ROW):
             count = 0
@@ -295,9 +319,9 @@ class MainWindow(QMainWindow):
     def predict_by_chislo(self,data,**params):
         l =[]
         if params['mnog']:
-            l.append('Множина')
+            l.append("Множина")
         if params['odni']:
-            l.append('Однина')
+            l.append("Однина")
         res = []
         for i in range(self.ROW):
             count = 0
@@ -312,8 +336,8 @@ class MainWindow(QMainWindow):
     def predict_by_vidmina(self,data,**params):
         l = []
         for k in range(4):
-            if params['a'+str(k)]:
-                l.append(str(k+1)+ ' відміна')
+            if params["a"+str(k)]:
+                l.append(str(k+1)+ " відміна")
         res = []
         for i in range(self.ROW):
             count = 0

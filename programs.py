@@ -17,6 +17,10 @@ from PySide2.QtWidgets import *
 
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
+
+
+
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
@@ -24,13 +28,10 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(997, 702)
         MainWindow.setDocumentMode(False)
-        
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.action_3 = QAction(MainWindow)
         self.action_3.setObjectName(u"action_3")
-        self.actionXML = QAction(MainWindow)
-        self.actionXML.setObjectName(u"actionXML")
         self.actionTXT = QAction(MainWindow)
         self.actionTXT.setObjectName(u"actionTXT")
         self.actionJSON = QAction(MainWindow)
@@ -212,7 +213,6 @@ class Ui_MainWindow(object):
         self.menu.addSeparator()
         self.menu.addAction(self.menu_3.menuAction())
         self.menu.addAction(self.action_6)
-        self.menu_3.addAction(self.actionXML)
         self.menu_3.addAction(self.actionTXT)
         self.menu_3.addAction(self.actionJSON)
         self.menu_2.addAction(self.action)
@@ -225,14 +225,16 @@ class Ui_MainWindow(object):
         self.checkBox_predict.toggled.connect(self.groupBox_predict.setVisible)
         self.action_6.triggered.connect(MainWindow.close)
 
+
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
+    def pr(self):
+        print('chlen')
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.action.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
         self.action_3.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
-        self.actionXML.setText(QCoreApplication.translate("MainWindow", u"XML", None))
         self.actionTXT.setText(QCoreApplication.translate("MainWindow", u"TXT", None))
         self.actionJSON.setText(QCoreApplication.translate("MainWindow", u"JSON", None))
         self.action_6.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0438\u0445\u0456\u0434", None))
