@@ -23,13 +23,22 @@ class FileExport(QWidget):
         self.words = words
     def txt(self):
         p = QFileDialog.getSaveFileName(self,'SaveFile','відповідь','.txt')
-        with open(p[0]+p[1],'w') as f:
-            f.write(self.data)
-            f.close()
+        if len(self.data) == 1:
+            with open(p[0]+p[1],'w') as f:
+                f.write(str(self.data))
+        else:
+            with open(p[0]+p[1],'w') as f:
+                for i in range(self.row):
+                    f.write(str(self.data[i])+"\n")
+                f.close()
+
     def json(self):
         p = QFileDialog.getSaveFileName(self,'SaveFile','відповідь','.json')
         if len(self.data) == 1:
-            dat = '{\nanswer: ()\n}'.format(self.data)
+            with open(p[0]+p[1],'w') as f:
+                f.write("{\n")
+                f.write("answer: ()\n}".format(self.data))
+                f.close()
         else:
             with open(p[0]+p[1],'w') as f:
                 f.write('{')
@@ -115,6 +124,7 @@ class AnswerWindow(QMainWindow):
         return tabWidget
 
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -124,6 +134,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
+        self.show_message('Програма не гарантує 100% правильність відповіді')
 
 
     def solve(self):

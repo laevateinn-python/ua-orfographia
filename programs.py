@@ -38,6 +38,8 @@ class Ui_MainWindow(object):
         self.actionJSON.setObjectName(u"actionJSON")
         self.action_6 = QAction(MainWindow)
         self.action_6.setObjectName(u"action_6")
+        self.action_about = QAction(MainWindow)
+        self.action_about.setObjectName(u"action_about")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayoutWidget_2 = QWidget(self.centralwidget)
@@ -216,6 +218,7 @@ class Ui_MainWindow(object):
         self.menu_3.addAction(self.actionTXT)
         self.menu_3.addAction(self.actionJSON)
         self.menu_2.addAction(self.action)
+        self.menu_2.addAction(self.action_about)
         self.menu_2.addSeparator()
 
         self.retranslateUi(MainWindow)
@@ -228,16 +231,14 @@ class Ui_MainWindow(object):
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
-    def pr(self):
-        print('chlen')
-
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.action.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
+        self.action.setText(QCoreApplication.translate("MainWindow", u"\u0406\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0456\u044f", None))
         self.action_3.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.actionTXT.setText(QCoreApplication.translate("MainWindow", u"TXT", None))
         self.actionJSON.setText(QCoreApplication.translate("MainWindow", u"JSON", None))
         self.action_6.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0438\u0445\u0456\u0434", None))
+        self.action_about.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u0411\u0443\u0434\u044c\u043b\u0430\u0441\u043a\u0430 \u0432\u0432\u0435\u0434\u0456\u0442\u044c \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u044f\u0434\u043a\u0456\u0432", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0441\u043b\u0456\u0432 \u0443 \u0440\u044f\u0434\u043a\u0443", None))
@@ -260,7 +261,7 @@ class Ui_MainWindow(object):
         self.checkBox_predict.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0435\u0434\u0438\u043a\u0442\u0443\u0432\u0430\u0442\u0438 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442?", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
         self.menu_3.setTitle(QCoreApplication.translate("MainWindow", u"\u0415\u043a\u0441\u043f\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438", None))
-        self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e", None))
+        self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"\u0406\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0456\u044f", None))
 
         self.checkBox_vidm_1.setText(QCoreApplication.translate("MainWindow", u"I", None))
         self.checkBox_vidm_2.setText(QCoreApplication.translate("MainWindow", u"II", None))
