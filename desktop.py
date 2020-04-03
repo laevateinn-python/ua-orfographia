@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
         self.export = ExportFile()
-        self.ui.actionTXT.triggered.connect(self.export.TXT())
+        #self.ui.actionTXT.triggered.connect(self.export.TXT())
 
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
