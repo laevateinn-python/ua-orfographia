@@ -7,6 +7,7 @@ from PySide2.QtCore import QFile, QRect
 from PySide2.QtGui import QIcon
 from programs import Ui_MainWindow
 from widget_answer import Ui_Form
+from instruction import Ui_Dialog
 from my_parser import MyParser
 
 
@@ -47,7 +48,13 @@ class FileExport(QWidget):
                 f.write("}")
                 f.close()
 
-
+class Another(QWidget):
+    def __init__(self):
+        super(Another, self).__init__()
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)
+    def instruction(self):
+        self.show()
 
 class AnswerWindow(QMainWindow):
     def __init__(self,row,words):
@@ -124,7 +131,6 @@ class AnswerWindow(QMainWindow):
         return tabWidget
 
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -134,6 +140,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
+        self.another = Another()
+        self.ui.action.triggered.connect(self.another.instruction)
         self.show_message('Програма не гарантує 100% правильність відповіді')
 
 
@@ -361,12 +369,18 @@ class MainWindow(QMainWindow):
         return(answer)
 
 
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
     window = MainWindow()
+
     window.show()
 
     sys.exit(app.exec_())

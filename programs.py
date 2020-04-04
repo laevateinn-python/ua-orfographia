@@ -8,14 +8,17 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 import os
-from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+from PySide2.QtCore import (QCoreApplication,QFile, QMetaObject, QObject, QPoint,
     QRect, QSize, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
     QRadialGradient)
+from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import *
 
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
+
+
 
 
 
@@ -230,6 +233,7 @@ class Ui_MainWindow(object):
 
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
