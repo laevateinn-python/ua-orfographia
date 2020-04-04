@@ -24,6 +24,7 @@ DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
 
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():

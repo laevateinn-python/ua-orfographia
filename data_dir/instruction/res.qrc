@@ -14,6 +14,9 @@
     <file>text.png</file>
     <file>1.png</file>
   </qresource>
+  <qresource prefix="About">
+    <file>about.png</file>
+  </qresource>
   <qresource prefix="новийПрефікс">
     <file>icon.png</file>
   </qresource>

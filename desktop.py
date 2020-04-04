@@ -8,6 +8,7 @@ from PySide2.QtGui import QIcon
 from programs import Ui_MainWindow
 from widget_answer import Ui_Form
 from instruction import Ui_Dialog
+from about import Ui_About
 from my_parser import MyParser
 
 
@@ -54,6 +55,14 @@ class Another(QWidget):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
     def instruction(self):
+        self.show()
+
+class About(QWidget):
+    def __init__(self):
+        super(About, self).__init__()
+        self.ui = Ui_About()
+        self.ui.setupUi(self)
+    def about(self):
         self.show()
 
 class AnswerWindow(QMainWindow):
@@ -130,7 +139,6 @@ class AnswerWindow(QMainWindow):
         tabWidget.setGeometry(QRect(10, 0, 661, 431))
         return tabWidget
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -141,7 +149,9 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
         self.another = Another()
+        self.ab = About()
         self.ui.action.triggered.connect(self.another.instruction)
+        self.ui.action_about.triggered.connect(self.ab.about)
         self.show_message('Програма не гарантує 100% правильність відповіді')
 
 
