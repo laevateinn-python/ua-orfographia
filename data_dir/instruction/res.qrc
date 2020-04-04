@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="instruction">
+    <file>2.png</file>
+    <file>3.png</file>
+    <file>4.png</file>
+    <file>export.png</file>
+    <file>pre_1.png</file>
+    <file>pre_2.png</file>
+    <file>pre_4.png</file>
+    <file>predict_box.png</file>
+    <file>predict_box2.png</file>
+    <file>row_cow.png</file>
+    <file>solve.png</file>
+    <file>text.png</file>
+    <file>1.png</file>
+  </qresource>
+  <qresource prefix="новийПрефікс">
+    <file>icon.png</file>
+  </qresource>
+</RCC>
