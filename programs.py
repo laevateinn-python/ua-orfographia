@@ -13,7 +13,6 @@ from PySide2.QtCore import (QCoreApplication,QFile, QMetaObject, QObject, QPoint
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
     QRadialGradient)
-from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import *
 
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
