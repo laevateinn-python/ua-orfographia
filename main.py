@@ -9,6 +9,7 @@ from programs import Ui_MainWindow
 from widget_answer import Ui_Form
 from instruction import Ui_Dialog
 from about import Ui_About
+from settings import Ui_s
 from my_parser import MyParser
 
 
@@ -64,6 +65,12 @@ class About(QWidget):
         self.ui.setupUi(self)
     def about(self):
         self.show()
+
+class Settings(QWidget):
+    def __init__(self):
+        super(Settings, self).__init__()
+        self.ui =
+
 
 class AnswerWindow(QMainWindow):
     def __init__(self,row,words):
