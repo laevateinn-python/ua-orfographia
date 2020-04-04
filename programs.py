@@ -238,7 +238,7 @@ class Ui_MainWindow(object):
         self.actionTXT.setText(QCoreApplication.translate("MainWindow", u"TXT", None))
         self.actionJSON.setText(QCoreApplication.translate("MainWindow", u"JSON", None))
         self.action_6.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0438\u0445\u0456\u0434", None))
-        self.action_about.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
+        self.action_about.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0432\u0456\u0434\u043a\u0430", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u0411\u0443\u0434\u044c\u043b\u0430\u0441\u043a\u0430 \u0432\u0432\u0435\u0434\u0456\u0442\u044c \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u044f\u0434\u043a\u0456\u0432", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0441\u043b\u0456\u0432 \u0443 \u0440\u044f\u0434\u043a\u0443", None))

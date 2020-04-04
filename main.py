@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
+        self.setWindowTitle('Програма для морфологічного аналізу слів, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
         self.another = Another()
