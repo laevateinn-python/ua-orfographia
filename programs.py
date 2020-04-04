@@ -15,7 +15,6 @@ from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QRadialGradient)
 from PySide2.QtWidgets import *
 
-DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
 
 class Ui_MainWindow(object):
@@ -25,6 +24,9 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(997, 702)
         MainWindow.setDocumentMode(False)
+        icon = QIcon()
+        icon.addFile(u":/\u043d\u043e\u0432\u0438\u0439\u041f\u0440\u0435\u0444\u0456\u043a\u0441/icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.action_3 = QAction(MainWindow)

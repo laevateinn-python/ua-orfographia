@@ -12,6 +12,7 @@ from about import Ui_About
 from settings import Ui_Settings
 from my_parser import MyParser
 
+import res_rc
 
 
 ANSWER_LETTER = 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'
@@ -155,7 +156,6 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowIcon(QIcon(DATA_DIR+'/icon.png'))
         self.setWindowTitle('Програма для граматичного розбору слова, та вирішування тестів')
         self.ui.pushButton_solve.clicked.connect(self.solve)
         self.parser_obj = MyParser()
