@@ -19,12 +19,6 @@ from PySide2.QtWidgets import *
 DATA_DIR = os.path.join(os.path.dirname(__file__),'data_dir')
 
 
-
-
-
-
-
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
@@ -134,6 +128,7 @@ class Ui_MainWindow(object):
         self.groupBox_predict.setToolTipDuration(-4)
         self.groupBox_predict.setLayoutDirection(Qt.LeftToRight)
         self.groupBox_predict.setAutoFillBackground(True)
+        self.groupBox_predict.hide()
         self.gridLayoutWidget_3 = QWidget(self.groupBox_predict)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
         self.gridLayoutWidget_3.setGeometry(QRect(10, 20, 121, 251))
@@ -188,8 +183,7 @@ class Ui_MainWindow(object):
         self.checkBox_predict = QCheckBox(self.groupBox_2)
         self.checkBox_predict.setObjectName(u"checkBox_predict")
         self.checkBox_predict.setGeometry(QRect(10, 190, 158, 17))
-        self.checkBox_predict.setChecked(True)
-        self.checkBox_predict.setTristate(False)
+        self.checkBox_predict.setChecked(False)
 
         self.gridLayout_2.addWidget(self.groupBox_2, 0, 1, 1, 1)
 

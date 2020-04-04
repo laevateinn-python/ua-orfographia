@@ -9,7 +9,7 @@ from programs import Ui_MainWindow
 from widget_answer import Ui_Form
 from instruction import Ui_Dialog
 from about import Ui_About
-from settings import Ui_s
+from settings import Ui_Settings
 from my_parser import MyParser
 
 
@@ -69,7 +69,11 @@ class About(QWidget):
 class Settings(QWidget):
     def __init__(self):
         super(Settings, self).__init__()
-        self.ui =
+        self.ui = Ui_Settings()
+        self.ui.setupUi(self)
+
+    def show_set(self):
+        self.show()
 
 
 class AnswerWindow(QMainWindow):
@@ -157,15 +161,22 @@ class MainWindow(QMainWindow):
         self.parser_obj = MyParser()
         self.another = Another()
         self.ab = About()
+        self.settings  = Settings()
         self.ui.action.triggered.connect(self.another.instruction)
         self.ui.action_about.triggered.connect(self.ab.about)
+        self.ui.action_3.triggered.connect(self.settings.show_set)
+        self.settings.ui.checkBox.clicked.connect(self.hide_predict)
+
         self.show_message('Програма не гарантує 100% правильність відповіді')
+
+    def hide_predict(self):
+        self.ui.checkBox_predict.hide()
+        self.ui.groupBox_predict.hide()
 
 
     def solve(self):
         self.ROW = int(self.ui.lineEdit_number_of_row.text())
         self.WORDS = int(self.ui.lineEdit_number_of_words.text())
-        self.export_row_a_word = [self.ROW,self.WORDS]
         self.answer = AnswerWindow(self.ROW,self.WORDS)
         text = self.ui.plainTextEdit.toPlainText()
         massive = self.make_2d_massive(text)
